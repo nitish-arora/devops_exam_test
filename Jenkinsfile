@@ -6,8 +6,8 @@ pipeline {
 	}
 	options {
 		timestamps()
-		timeout(time: 1, unit: 'Hours')
-		buildDiscarder(logRotator(daysToKeepStr: '10', numbToKeepStr: '10'))
+		timeout(time: 1, unit: 'HOURS')
+		buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '10'))
 		disableConcurrentBuilds()
 	}
 	stages {
