@@ -17,5 +17,11 @@ pipeline {
 				checkout scm
 			}
 		}
+		stage('Build') {
+			steps {
+				echo 'building'
+				bat 'mvn install'
+			}
+		}
 	}
 }
