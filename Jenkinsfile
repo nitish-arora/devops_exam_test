@@ -81,7 +81,7 @@ pipeline {
 		}
 		stage('Helm chart deployment') {
 			steps {
-				bat 'kubectl create ns devops_exam_practice_%BUILD_NUMBER%'
+				bat 'kubectl create ns devops-exam-practice-%BUILD_NUMBER%'
 				bat 'helm install hello-devops my-chart --set image=nitisharora31/devops_exam_practice:%BUILD_NUMBER%'
 			}
 		}
