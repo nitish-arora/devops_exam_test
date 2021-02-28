@@ -7,6 +7,7 @@ pipeline {
 	options {
 		timestamps()
 		timeout(time: 1, unit: 'HOURS')
+		skipDefaultCheckout()
 		buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '10'))
 		disableConcurrentBuilds()
 	}
@@ -55,5 +56,11 @@ pipeline {
 				)
 			}
 		}
+		stage('Docker Image') {
+			steps{
+				docker build -t nitisharora31/devops_exam_practice:%BUILD_NUMBER% --no-cache -f Dockerfile .
+			}
+		}
+		
 	}
 }
