@@ -23,5 +23,11 @@ pipeline {
 				bat 'mvn install'
 			}
 		}
+		stage('Unit Testing') {
+			steps {
+				echo 'Executing unit test cases'
+				bat 'mvn test'
+			}
+		}
 	}
 }
