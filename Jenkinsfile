@@ -61,6 +61,29 @@ pipeline {
 				bat 'docker build -t nitisharora31/devops_exam_practice:%BUILD_NUMBER% --no-cache -f Dockerfile .'
 			}
 		}
+		stage('Docker Image Push') {
+			steps {
+				withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
+					bat 'docker login -u %docker_username% -p %docker_password%'
+					bat 'docker push nitisharora31/devops_exam_practice:%BUILD_NUMBER%'
+				}
+			}
+		}
+		stage('Stop and remove container') {
+			steps {
+				bat '(docker stop c_devops_practice || echo "No container exist with such name") && (docker rm -fv c_devops_practice || echo "No container exist with such name")'
+			}
+		}
+		stage('Run container') {
+			steps {
+				bat 'docker run --name c_devops_practice -d -p 9999:8080 nitisharora31/devops_exam_practice:%BUILD_NUMBER%'
+			}
+		}
 		
+	}
+	post {
+		always {
+			junit '**/*.xml'
+		}
 	}
 }
