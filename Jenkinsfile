@@ -79,6 +79,12 @@ pipeline {
 				bat 'docker run --name c_devops_practice -d -p 9999:8080 nitisharora31/devops_exam_practice:%BUILD_NUMBER%'
 			}
 		}
+		stage('Helm chart deployment') {
+			steps {
+				bat 'kubectl create ns devops_exam_practice_%BUILD_NUMBER%'
+				bat 'helm install hello-devops my-chart --set image=nitisharora31/devops_exam_practice:%BUILD_NUMBER%'
+			}
+		}
 		
 	}
 	post {
