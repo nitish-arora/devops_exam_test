@@ -58,7 +58,7 @@ pipeline {
 		}
 		stage('Docker Image') {
 			steps{
-				docker build -t nitisharora31/devops_exam_practice:%BUILD_NUMBER% --no-cache -f Dockerfile .
+				bat 'docker build -t nitisharora31/devops_exam_practice:%BUILD_NUMBER% --no-cache -f Dockerfile .'
 			}
 		}
 		
