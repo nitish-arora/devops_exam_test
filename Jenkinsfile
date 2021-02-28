@@ -29,5 +29,13 @@ pipeline {
 				bat 'mvn test'
 			}
 		}
+		stage('Sonar Analysis') {
+			steps {
+				withSonarQubeEnv('Test_Sonar') {
+					echo 'running sonar analysis'
+					bat 'mvn sonar:sonar'
+				}
+			}
+		}
 	}
 }
